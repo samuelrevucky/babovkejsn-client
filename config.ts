@@ -1,1 +1,1 @@
-export const server_address = "http://localhost:8000";
+export const server_address = "https://babovkejsn-server-dc5d064c234e.herokuapp.com/";
