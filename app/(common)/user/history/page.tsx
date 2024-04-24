@@ -31,7 +31,7 @@ async function getOrders() {
             url: process.env.SERVER + '/api/orders',
             withCredentials: true,
             headers: {
-                Cookie: `authtoken=${cookieStore.get('authtoken')?.value}`
+                token: cookieStore.get('authtoken')?.value
             }
         };
 

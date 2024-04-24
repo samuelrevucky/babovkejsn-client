@@ -5,8 +5,9 @@ import Selector from "./selector";
 import { useState } from "react";
 import { Product, Day } from "./page";
 import { PlusIcon, MinusIcon, TrashIcon } from "@heroicons/react/20/solid";
-import axios from "axios";
+import axios, { AxiosHeaderValue } from "axios";
 import { useRouter } from "next/navigation";
+import { cookies } from "next/headers";
 
 
 export interface cartItem {
@@ -21,6 +22,7 @@ export interface cartItem {
 
 export default function Order({ products, days }: { products: Product[], days: Day[][] }) {
     const router = useRouter();
+    const cookieStore = cookies();
     // cart logic
     
     const [cart, setCart] = useState(Array<[cartItem, number]>);
@@ -77,7 +79,7 @@ export default function Order({ products, days }: { products: Product[], days: D
             price: totalPrice,
             details: cart.map(([cartItem, number]) => cartItem),
             note: note
-        }, {withCredentials: true})
+        }, {withCredentials: true, headers: {token: cookieStore.get('authtoken') as unknown as AxiosHeaderValue}})
         .then(() => {router.push('/user/successful_order');})
         .catch(err => {router.push('/user/err_order')});
     };
