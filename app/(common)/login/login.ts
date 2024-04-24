@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { cookies } from "next/headers";
 
-export async function login(email: string, password: string, rememberMe: boolean) {
+export async function Login(email: string, password: string, rememberMe: boolean) {
     "use server";
     const router = useRouter();
     const cookieStore = cookies();
