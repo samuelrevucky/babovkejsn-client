@@ -5,9 +5,10 @@ import Selector from "./selector";
 import { useState } from "react";
 import { Product, Day } from "./page";
 import { PlusIcon, MinusIcon, TrashIcon } from "@heroicons/react/20/solid";
-import axios, { AxiosHeaderValue } from "axios";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { getToken } from "../get_token";
+import { getCookie } from "cookies-next";
 
 
 export interface cartItem {
@@ -72,10 +73,10 @@ export default function Order({ products, days, server }: { products: Product[],
         console.log(note);
     };
     const handleOrderSubmit = async () => {
-        const token = await getToken();
-        console.log(getToken());
+        
+        console.log(getCookie('authtoken'));
         axios.post(server + '/api/submit_order', {
-            token: getToken(),
+            token: getCookie('authtoken'),
             order_deadline: selectedDate?.day,
             preparation_time: totalProductionTime,
             price: totalPrice,
