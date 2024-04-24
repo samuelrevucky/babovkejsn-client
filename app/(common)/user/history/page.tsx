@@ -25,17 +25,7 @@ interface Order {
 async function getOrders() {
     try {
         const cookieStore = cookies();
-        const token = cookieStore.get('authtoken');
-        const axiosConfig: AxiosRequestConfig = {
-            method: 'get',
-            url: process.env.SERVER + '/api/orders',
-            withCredentials: true,
-            headers: {
-                token: cookieStore.get('authtoken')?.value
-            }
-        };
-
-        return await axios(axiosConfig)
+        return await axios.post(process.env.SERVER + '/api/orders', {token: cookieStore.get('authtoken')?.value})
             .then(res => {
                 if (res.data.length == 0) {
                     return (

@@ -73,12 +73,13 @@ export default function Order({ products, days }: { products: Product[], days: D
     };
     const handleOrderSubmit = () => {
         axios.post(process.env.SERVER + '/api/submit_order', {
+            token: getToken(),
             order_deadline: selectedDate?.day,
             preparation_time: totalProductionTime,
             price: totalPrice,
             details: cart.map(([cartItem, number]) => cartItem),
             note: note
-        }, {withCredentials: true, headers: {token: getToken as unknown as AxiosHeaderValue}})
+        })
         .then(() => {router.push('/user/successful_order');})
         .catch(err => {router.push('/user/err_order')});
     };
