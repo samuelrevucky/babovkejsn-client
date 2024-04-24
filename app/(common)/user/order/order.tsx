@@ -8,6 +8,7 @@ import { PlusIcon, MinusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import axios, { AxiosHeaderValue } from "axios";
 import { useRouter } from "next/navigation";
 import { cookies } from "next/headers";
+import { getToken } from "../get_token";
 
 
 export interface cartItem {
@@ -79,7 +80,7 @@ export default function Order({ products, days }: { products: Product[], days: D
             price: totalPrice,
             details: cart.map(([cartItem, number]) => cartItem),
             note: note
-        }, {withCredentials: true, headers: {token: cookieStore.get('authtoken') as unknown as AxiosHeaderValue}})
+        }, {withCredentials: true, headers: {token: getToken as unknown as AxiosHeaderValue}})
         .then(() => {router.push('/user/successful_order');})
         .catch(err => {router.push('/user/err_order')});
     };
