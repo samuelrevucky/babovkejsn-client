@@ -16,7 +16,13 @@ export async function login(email: string, password: string, rememberMe: boolean
     })
     .then(function (response) {
         if (response.data.authenticated) {
-            cookieStore.set('authtoken', response.data.token, )
+            cookieStore.set('authtoken', response.data.token, {
+                maxAge: rememberMe ? 3600*24*30 : 3600,
+                path: '/',
+                sameSite: 'lax',
+                secure: true,
+                httpOnly: true
+            })
             redirect("/user/profile");
         }
         else {

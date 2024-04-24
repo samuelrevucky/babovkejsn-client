@@ -7,7 +7,6 @@ import { Product, Day } from "./page";
 import { PlusIcon, MinusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { getToken } from "../get_token";
 import { getCookie } from "cookies-next";
 
 
