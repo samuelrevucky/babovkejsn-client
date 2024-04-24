@@ -8,6 +8,7 @@ import { PlusIcon, MinusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
+import { getToken } from "./get_token";
 
 
 export interface cartItem {
@@ -72,10 +73,9 @@ export default function Order({ products, days, server }: { products: Product[],
         console.log(note);
     };
     const handleOrderSubmit = async () => {
-        
-        console.log(getCookie('authtoken'));
+        const token = await getToken();
         axios.post(server + '/api/submit_order', {
-            token: getCookie('authtoken'),
+            token: token,
             order_deadline: selectedDate?.day,
             preparation_time: totalProductionTime,
             price: totalPrice,
