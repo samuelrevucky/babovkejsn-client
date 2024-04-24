@@ -6,7 +6,6 @@ import { useState } from "react";
 import { Product, Day } from "./page";
 import { PlusIcon, MinusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
-import { server_address } from "@/config";
 import { useRouter } from "next/navigation";
 
 
@@ -72,7 +71,7 @@ export default function Order({ products, days }: { products: Product[], days: D
         console.log(note);
     };
     const handleOrderSubmit = () => {
-        axios.post(server_address + '/api/submit_order', {
+        axios.post(process.env.SERVER + '/api/submit_order', {
             order_deadline: selectedDate?.day,
             preparation_time: totalProductionTime,
             price: totalPrice,
