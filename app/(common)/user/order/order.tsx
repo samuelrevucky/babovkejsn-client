@@ -72,6 +72,8 @@ export default function Order({ products, days }: { products: Product[], days: D
         console.log(note);
     };
     const handleOrderSubmit = () => {
+        const token = getToken();
+        console.log(token);
         axios.post(process.env.SERVER + '/api/submit_order', {
             token: getToken(),
             order_deadline: selectedDate?.day,
