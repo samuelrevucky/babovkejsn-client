@@ -1,6 +1,5 @@
 import axios from "axios";
 import Order from "./order";
-import { cookies } from "next/headers";
 
 
 export interface Product {
@@ -45,7 +44,7 @@ export default async function Page() {
     for (let i = 0; i < month - 1; i++) days.push([]);
     for (let i = month - 1; i < +month + 3; i++ ) days.push(await getDays(i));
     return (
-      <Order products={products} days={days}/>
+      <Order products={products} days={days} server={process.env.SERVER as string}/>
     );
   }
   catch (err) {
