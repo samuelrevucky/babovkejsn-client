@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { server_address } from "@/config";
 import { cookies } from "next/headers";
 
 
@@ -29,7 +28,7 @@ async function getOrders() {
         const token = cookieStore.get('authtoken');
         const axiosConfig: AxiosRequestConfig = {
             method: 'get',
-            url: server_address + '/api/orders',
+            url: process.env.SERVER + '/api/orders',
             withCredentials: true,
             headers: {
                 Cookie: `authtoken=${cookieStore.get('authtoken')?.value}`

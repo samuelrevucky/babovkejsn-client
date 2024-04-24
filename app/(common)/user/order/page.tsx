@@ -1,5 +1,4 @@
 import axios from "axios";
-import { server_address } from "@/config";
 import Order from "./order";
 import { cookies } from "next/headers";
 
@@ -28,12 +27,12 @@ export interface Day {
 }
 
 async function getProducts() {
-  const response = await axios.get(server_address + '/api/products', {withCredentials: true});
+  const response = await axios.get(process.env.SERVER + '/api/products', {withCredentials: true});
   return response.data;
 };
 
 async function getDays(month: number) {
-  const response = await axios.get(server_address + '/api/days/' + month, {withCredentials: true});
+  const response = await axios.get(process.env.SERVER + '/api/days/' + month, {withCredentials: true});
   return response.data;
 }
 
