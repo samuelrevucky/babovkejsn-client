@@ -7,7 +7,7 @@ import { Product, Day } from "./page";
 import { PlusIcon, MinusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import axios, { AxiosHeaderValue } from "axios";
 import { useRouter } from "next/navigation";
-import { getToken } from "../get_token";
+import { getToken, getServerAddress } from "../get_token";
 
 
 export interface cartItem {
@@ -72,10 +72,10 @@ export default function Order({ products, days }: { products: Product[], days: D
         console.log(note);
     };
     const handleOrderSubmit = () => {
-        console.log(process.env.SERVER);
+        console.log(getServerAddress());
         const token = getToken();
         console.log(token);
-        axios.post(process.env.SERVER + '/api/submit_order', {
+        axios.post(getServerAddress() + '/api/submit_order', {
             token: getToken(),
             order_deadline: selectedDate?.day,
             preparation_time: totalProductionTime,
