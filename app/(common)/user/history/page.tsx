@@ -74,7 +74,7 @@ async function getOrders() {
                                                     {Object.entries(orders[i]).slice(0, -2).map(([key, value]) => {
                                                         
                                                             return (
-                                                                <div className="flex flex-col border border-yellow-500 rounded-2xl p-4">
+                                                                <div key={key} className="flex flex-col border border-yellow-500 rounded-2xl p-4">
                                                                     <p className="mt-1 truncate text-sm font-semibold leading-5 text-gray-900">
                                                                         {slovakMapping[key]}
                                                                     </p>
@@ -102,7 +102,7 @@ async function getOrders() {
                                                                             <ul className="pl-3">
                                                                             {Object.entries(product.variants).map(([variantType, typeValue]) => {
                                                                                 return (
-                                                                                    <li className="flex">
+                                                                                    <li key={variantType} className="flex">
                                                                                         <p className="mt-1 truncate text-xs font-semibold leading-5 text-gray-500 flex">{variantType}</p>
                                                                                         <p className="mt-1 truncate text-xs leading-5 text-gray-500"><span>:&nbsp;</span></p> 
                                                                                         <p className="mt-1 truncate text-xs leading-5 text-gray-500">{typeValue}</p>
