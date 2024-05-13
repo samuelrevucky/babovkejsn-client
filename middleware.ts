@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from 'next/headers';
 
 export function middleware(request: NextRequest) {
-    const cookieStore = cookies();
     if (request.nextUrl.pathname.startsWith('/user')) {
         const token: string | undefined = request.cookies.get('authtoken')?.value;
         if (token === undefined) {
